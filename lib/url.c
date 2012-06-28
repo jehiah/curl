@@ -581,7 +581,7 @@ CURLcode Curl_ch_connc(struct SessionHandle *data,
   if(newamount < 1)
     newamount = 1; /* we better have at least one entry */
 
-  if(!c) {
+  if(!c && data) {
     /* we get a NULL pointer passed in as connection cache, which means that
        there is no cache created for this SessionHandle just yet, we create a
        brand new with the requested size.
@@ -607,7 +607,7 @@ CURLcode Curl_ch_connc(struct SessionHandle *data,
 
     /* If the most recent connection is no longer valid, mark it
        invalid. */
-    if(data->state.lastconnect <= newamount)
+    if(data && data->state.lastconnect <= newamount)
       data->state.lastconnect = -1;
   }
   if(newamount > 0) {

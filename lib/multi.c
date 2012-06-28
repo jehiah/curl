@@ -2250,6 +2250,15 @@ CURLMcode curl_multi_setopt(CURLM *multi_handle,
   case CURLMOPT_MAXCONNECTS:
     multi->maxconnects = va_arg(param, long);
     break;
+  case CURLMOPT_CONNECTION_POOL_SIZE:
+    {
+        long new_value = va_arg(param, long);
+        if (new_value > multi->maxconnects) {
+            multi->maxconnects = new_value;
+        }
+        Curl_ch_connc(NULL, multi->connc, new_value);
+    }
+    break;
   default:
     res = CURLM_UNKNOWN_OPTION;
     break;

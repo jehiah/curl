@@ -311,6 +311,9 @@ typedef enum {
   /* maximum number of entries in the connection cache */
   CINIT(MAXCONNECTS, LONG, 6),
 
+  /* actual size of the connection cache pool */
+  CINIT(CONNECTION_POOL_SIZE, LONG, 7),
+
   CURLMOPT_LASTENTRY /* the last unused */
 } CURLMoption;
 
